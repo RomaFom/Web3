@@ -1,5 +1,7 @@
 import { Menu, Icon } from "semantic-ui-react";
 import { useState } from "react";
+import Link from "next/link";
+
 export default function Header() {
   const [activeItem, setActiveItem] = useState();
 
@@ -9,30 +11,35 @@ export default function Header() {
 
   return (
     <Menu style={{ marginTop: "10px" }}>
-      <Menu.Item
-        name="crown"
-        active={activeItem === "crown"}
-        onClick={handleItemClick}
-      >
-        CrowdCoin
-      </Menu.Item>
+      <Link href="/">
+        <a className="item">CrowdCoin</a>
+      </Link>
 
       <Menu.Menu position="right">
-        <Menu.Item
+        <Link href="/">
+          <a className="item">Campaigns</a>
+        </Link>
+        {/* <Menu.Item
           name="campaigns"
           active={activeItem === "campaigns"}
           onClick={handleItemClick}
         >
           Campaigns
-        </Menu.Item>
+        </Menu.Item> */}
 
-        <Menu.Item
+        <Link href="/campaigns/new">
+          <a className="item">
+            <Icon name="add" />
+          </a>
+        </Link>
+
+        {/* <Menu.Item
           name=" "
           active={activeItem === "help"}
           onClick={handleItemClick}
         >
           <Icon name="add" />
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu.Menu>
     </Menu>
   );

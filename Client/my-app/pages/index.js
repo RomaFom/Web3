@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Card } from "semantic-ui-react";
 import { Button, Icon } from "semantic-ui-react";
 import Layout from "../components/Layout";
+import Link from "next/link";
 export default function Home() {
   const [campaigns, setCampaigns] = useState([]);
   const [items, setItems] = useState(null);
@@ -17,7 +18,11 @@ export default function Home() {
     const items = campaigns.map((campaign) => {
       return {
         header: campaign,
-        description: <a>View Campaign</a>,
+        description: (
+          <Link href={`/campaigns/${campaign}`}>
+            <a>View Campaign</a>
+          </Link>
+        ),
         fluid: true,
       };
     });
@@ -26,18 +31,22 @@ export default function Home() {
 
   const getCampaign = async () => {
     const campaigns = await factory.methods.getDeployedCampaigns().call();
-    setCampaigns((oldcampaigns) => [...oldcampaigns, campaigns[0]]);
+    console.log(campaigns);
+    setCampaigns(campaigns);
   };
 
   return (
     <Layout>
       <div className={styles.container}>
         <h3>Open Campaigns</h3>
-
-        <Button floated="right" icon labelPosition="right" primary="true">
-          Add Campaign
-          <Icon name="add" />
-        </Button>
+        <Link href="campaigns/new">
+          <a>
+            <Button floated="right" icon labelPosition="right" primary="true">
+              Add Campaign
+              <Icon name="add" />
+            </Button>
+          </a>
+        </Link>
         {items && <Card.Group items={items} />}
       </div>
     </Layout>
