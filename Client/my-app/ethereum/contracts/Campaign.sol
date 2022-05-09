@@ -72,8 +72,7 @@ contract Campaign{
             address(this).balance,
             numRequests,
             approversCount,
-            manager,
-
+            manager
         );
     }
 
