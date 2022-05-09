@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import Campaign from "../../ethereum/campaign";
 import { useState, useEffect } from "react";
-import { Card, Grid, Image, Button, Icon } from "semantic-ui-react";
+import { Card, Grid, Button } from "semantic-ui-react";
 import web3 from "../../ethereum/web3";
 import Contribute from "../../components/Contribute";
 
@@ -65,22 +65,26 @@ export default function CampaignData() {
       <h3>Campaign Data</h3>
 
       <Grid>
-        <Grid.Column width={10}>
-          {balance && renderCards()}
-          <Link href={`/campaigns/${address}/requests`}>
-            <a>
-              <Button primary>View requests</Button>
-            </a>
-          </Link>
-        </Grid.Column>
+        <Grid.Row>
+          <Grid.Column width={10}>{balance && renderCards()}</Grid.Column>
 
-        <Grid.Column width={6}>
-          <Contribute
-            address={address}
-            refresh={refresh}
-            setRefresh={setRefresh}
-          />
-        </Grid.Column>
+          <Grid.Column width={6}>
+            <Contribute
+              address={address}
+              refresh={refresh}
+              setRefresh={setRefresh}
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Link href={`/campaigns/${address}/requests`}>
+              <a>
+                <Button primary>View requests</Button>
+              </a>
+            </Link>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </Layout>
   );
